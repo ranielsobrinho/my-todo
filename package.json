@@ -14,5 +14,9 @@
     "postgres"
   ],
   "author": "Raniel Sobrinho",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "express": "^4.17.1"
+  }
 }
