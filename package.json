@@ -17,6 +17,11 @@
   "license": "MIT",
   "dependencies": {
     "babel": "^6.23.0",
-    "express": "^4.17.1"
+    "consign": "^0.1.6",
+    "express": "^4.17.1",
+    "sequelize": "^6.6.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0"
   }
 }
