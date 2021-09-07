@@ -1,10 +1,13 @@
 const express  = require("express");
 const consign = require("consign");
+const db = require("./database/db");
 
 const app = express();
+app.use(express.json());
 
 consign()
-.include("models")
+.include("db.js")
+.then("models")
 .then("libs/middlewares.js")
 .then("routes")
 .then("libs/boot.js")
