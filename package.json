@@ -4,7 +4,7 @@
   "description": "A todo app in NodeJs that connects to postgres database and use React for front-end",
   "main": "main.js",
   "scripts": {
-    "start": "babel-node main.js"
+    "start": " nodemon babel-node main.js"
   },
   "keywords": [
     "todo",
@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "nodemon": "^2.0.12",
     "sequelize-cli": "^6.2.0"
   }
 }
