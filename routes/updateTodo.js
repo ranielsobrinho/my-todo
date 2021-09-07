@@ -10,7 +10,7 @@ module.exports = app => {
                 updatedTodo = await db.query("UPDATE todos SET content = $1 WHERE id = $2;",[content, id]);
             } 
             console.log("Atualização de dados feita com sucesso");
-            res.send(updatedTodo.rows[0]);
+            res.send("Atualizado com sucesso");
         } catch (error) {
             console.log(error)
         }
