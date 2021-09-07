@@ -1,18 +1,19 @@
-const Sequelize = require("sequelize");
-const dbConfig = require("../libs/config");
+const {Pool} = require("pg")
+const dbConfig = require("../libs/config.js");
 
-let sequelize = null;
+let pool = new Pool({
+            host: dbConfig.host,
+            database: dbConfig.database,
+            user: dbConfig.user,
+            password: dbConfig.password,
+            port: dbConfig.port
+})
 
-module.exports = () => {
-    if(!sequelize){
-        sequelize = new Sequelize(
-            dbConfig.database,
-            dbConfig.dialect,
-            dbConfig.host,
-            dbConfig.password,
-            dbConfig.port,
-            dbConfig.user
-        );
+module.exports = {
+    getTodo: (text, params) =>{
+        return pool.query(text, params)
+    },
+    query: (text, callback) => {
+        return pool.query(text, callback)
     }
-    return sequelize;
 };
