@@ -17,6 +17,14 @@ const Todos = sequelize.define("Todos", {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
     }
-})
+}, {
+    classMethods: {
+        associate: (models) => {
+            Todos.belongsTo(models.Users);
+        }
+    }
+});
 
-//Todos.sync({force: true})
+Todos.sync({force: true})
+
+module.exports = Todos;

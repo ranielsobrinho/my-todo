@@ -1,4 +1,3 @@
-/* Initialize Sequelize */
 const config = {
     username: "dev",
     password: "95751535r",
@@ -9,8 +8,7 @@ const config = {
 var Sequelize = require("sequelize");
 var sequelize = new Sequelize(config);
 
-/* Define Models */
-const User = sequelize.define("Users", {
+const Users = sequelize.define("Users", {
     name: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false
@@ -19,6 +17,13 @@ const User = sequelize.define("Users", {
         type: Sequelize.DataTypes.STRING,
         allowNull: false
     }
+}, {
+    classMethods: {
+        associate: (models) => {
+            Users.hasMany(models.Todos);
+        }
+    }
 });
+Users.sync({force: true});
 
-//User.sync({force: true});
+module.exports = Users;
