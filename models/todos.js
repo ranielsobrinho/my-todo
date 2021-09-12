@@ -1,27 +1,28 @@
-const config = {
-    username: "dev",
-    password: "95751535r",
-    database: "todos",
-    host: "localhost",
-    dialect: "postgres" 
-}
-var { Sequelize, DataTypes } = require("sequelize");
-var sequelize = new Sequelize(config);
+const Sequelize = require("sequelize");
+const database = require('../database/db');
 
-const Todos = sequelize.define("Todos", {
+const Todos = database.define("Todos", {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
     content: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
     },
     done: {
-        type: DataTypes.BOOLEAN,
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
         defaultValue: false,
-    }
-}, {
-    classMethods: {
-        associate: (models) => {
-            Todos.belongsTo(models.Users);
-        }
+    },
+    userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {model: 'Users', key: 'id'},
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
     }
 });
 

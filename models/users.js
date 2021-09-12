@@ -1,14 +1,13 @@
-const config = {
-    username: "dev",
-    password: "95751535r",
-    database: "todos",
-    host: "localhost",
-    dialect: "postgres" 
-}
-var Sequelize = require("sequelize");
-var sequelize = new Sequelize(config);
+const Sequelize = require("sequelize");
+const database = require('../database/db');
 
-const Users = sequelize.define("Users", {
+const Users = database.define("Users", {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
     name: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false
@@ -16,12 +15,6 @@ const Users = sequelize.define("Users", {
     email: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false
-    }
-}, {
-    classMethods: {
-        associate: (models) => {
-            Users.hasMany(models.Todos);
-        }
     }
 });
 Users.sync({force: true});
