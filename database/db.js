@@ -1,19 +1,14 @@
-const {Pool} = require("pg")
-const dbConfig = require("../libs/config.js");
+const Sequelize = require("sequelize");
+const config = require('../libs/config');
 
-let pool = new Pool({
-            host: dbConfig.host,
-            database: dbConfig.database,
-            user: dbConfig.user,
-            password: dbConfig.password,
-            port: dbConfig.port
-})
+const User = require('../models/User');
+const Todo = require('../models/Todo');
 
-module.exports = {
-    getTodo: (text, params) =>{
-        return pool.query(text, params)
-    },
-    query: (text, callback) => {
-        return pool.query(text, callback)
-    }
-};
+const sequelize = new Sequelize(config);
+
+User.init(sequelize);
+Todo.init(sequelize);
+
+Todo.associate(sequelize.models);
+
+module.exports = sequelize;
