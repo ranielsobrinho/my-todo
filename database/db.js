@@ -10,5 +10,6 @@ User.init(sequelize);
 Todo.init(sequelize);
 
 Todo.associate(sequelize.models);
+User.associate(sequelize.models);
 
 module.exports = sequelize;
