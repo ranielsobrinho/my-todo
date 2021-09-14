@@ -3,22 +3,46 @@ const User = require('../models/User');
 
 module.exports = {
     async index(req, res){
+        const { userId } = req.params;
 
+        const user = await User.findByPk(userId, {
+            include: {association: 'todos'}
+        });
+
+        if(!user) {
+            res.status(400).json({error : 'User not found.'});
+        }
+
+        res.send(user.todos);
     },
+
     async store(req, res){
-        const { user_id } = req.params;
+        const { userId } = req.params;
         const { content } = req.body;
 
-        const user = await User.findByPk(user_id);
+        const user = await User.findByPk(userId);
 
         if(!user){
             res.status(400).json({error: 'User not found.'});
         }
         const todo = await Todo.create({
             content,
-            user_id
+            userId
         });
 
         return res.json(todo);
+    },
+
+    async update( req, res ){
+        const {id} = req.params;
+        const {content} = req.body;
+
+
+    },
+
+    async delete(req, res){
+        const { id } = req.params
+
+        const deletedTodo = Todo
     }
 }
