@@ -5,6 +5,7 @@ module.exports = {
         const users = await User.findAll();
         return res.json(users);
     },
+
     async store (req, res) {
         const { name, email } = req.body;
 
@@ -13,5 +14,12 @@ module.exports = {
         return res.json(user);
     }, catch(error){
         console.error(error);
+    },
+    
+    async update( req, res ){
+
+    },
+    async delete(req, res){
+        
     }
 }
