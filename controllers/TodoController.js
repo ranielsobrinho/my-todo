@@ -36,6 +36,11 @@ module.exports = {
     async update( req, res ){
         const {id} = req.params;
         const {content} = req.body;
+        delete req.body.id;
+
+        const updatedTodo = await Todo.update({content},{
+            where:{id}
+        });
 
 
     },
