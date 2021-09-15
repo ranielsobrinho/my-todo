@@ -37,6 +37,11 @@ module.exports = {
         const {id} = req.params;
         const {content} = req.body;
 
+        const updatedTodo = await Todo.update({content},{
+            where:{id}
+        });
+
+        return res.status(200).send('Ok');
 
     },
 
