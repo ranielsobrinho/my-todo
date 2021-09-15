@@ -8,6 +8,7 @@ module.exports = {
 
     async store (req, res) {
         const { name, email } = req.body;
+        delete req.body.id;
 
         const user = await User.create({ name, email });
 
@@ -17,6 +18,9 @@ module.exports = {
     },
     
     async update( req, res ){
+        const { id } = req.params;
+        const { name, email } = req.body;
+        delete req.body.id;
 
         const updatedUser = await User.update({name, email},{
             where: {id}
@@ -31,6 +35,7 @@ module.exports = {
         const deletedUser = await User.destroy({
             where: {id}
         });
-        
+
+        res.status(200).json({status:'Operação feita com sucesso'});
     }
 }
