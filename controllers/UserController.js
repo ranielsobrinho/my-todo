@@ -18,6 +18,11 @@ module.exports = {
     
     async update( req, res ){
 
+        const updatedUser = await User.update({name, email},{
+            where: {id}
+        });
+
+        return res.status(200).send('Ok');
     },
     async delete(req, res){
         
