@@ -25,6 +25,12 @@ module.exports = {
         return res.status(200).send('Ok');
     },
     async delete(req, res){
+        const {id} = req.params;
+        delete req.body.id;
+
+        const deletedUser = await User.destroy({
+            where: {id}
+        });
         
     }
 }
