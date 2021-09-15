@@ -4,6 +4,7 @@ const User = require('../models/User');
 module.exports = {
     async index(req, res){
         const { userId } = req.params;
+        delete req.body.id;
 
         const user = await User.findByPk(userId, {
             include: {association: 'todos'}
@@ -19,6 +20,7 @@ module.exports = {
     async store(req, res){
         const { userId } = req.params;
         const { content } = req.body;
+        delete req.body.id;
 
         const user = await User.findByPk(userId);
 
@@ -30,7 +32,7 @@ module.exports = {
             userId
         });
 
-        return res.json(todo);
+        return res.status(201).json(todo);
     },
 
     async update( req, res ){
@@ -42,17 +44,19 @@ module.exports = {
             where:{id}
         });
 
+        return res.status(200).send('Ok');
 
     },
 
     async delete(req, res){
         const { id } = req.params
+        delete req.body.id;
 
-        const deletedTodo = Todo
-    }
-}        const deletedTodo = await Todo.destroy({
+        const deletedTodo = await Todo.destroy({
             where: { id }
         })
 
         return res.status(200).json({status: "Operação feita com sucesso."});
   
+    }
+}
