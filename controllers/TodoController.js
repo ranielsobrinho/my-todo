@@ -7,7 +7,10 @@ module.exports = {
         delete req.body.id;
 
         const user = await User.findByPk(userId, {
-            include: {association: 'todos'}
+            include: {
+                association: 'todos',
+                attributes: ['id','content']
+            }
         });
 
         if(!user) {
