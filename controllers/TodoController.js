@@ -9,7 +9,7 @@ module.exports = {
         const user = await User.findByPk(userId, {
             include: {
                 association: 'todos',
-                attributes: ['id','content']
+                attributes: ['id', 'content', 'done']
             }
         });
 
@@ -40,10 +40,10 @@ module.exports = {
 
     async update( req, res ){
         const {id} = req.params;
-        const {content} = req.body;
+        const {content, done} = req.body;
         delete req.body.id;
 
-        const updatedTodo = await Todo.update({content},{
+        const updatedTodo = await Todo.update({content, done},{
             where:{id}
         });
 
