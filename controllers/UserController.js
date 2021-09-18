@@ -6,6 +6,13 @@ module.exports = {
         return res.json(users);
     },
 
+    async user(req, res){
+        const {email} = req.body;
+
+        const user = await User.findOne({where:{email}});
+        res.send(user);
+    },
+
     async store (req, res) {
         const { name, email } = req.body;
         delete req.body.id;
