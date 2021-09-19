@@ -1,5 +1,7 @@
 const Sequelize = require("sequelize");
 const database = require('../db');
+const bcrypt = require('bcrypt');
+const { password } = require("pg/lib/defaults");
 
 const Users = database.define("Users", {
     id: {
@@ -13,6 +15,10 @@ const Users = database.define("Users", {
         allowNull: false
     },
     email: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: false
+    },
+    password: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false
     }
