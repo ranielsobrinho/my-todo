@@ -6,7 +6,7 @@ const AuthController = require('../controllers/AuthController');
 const routes = express.Router();
 
 routes.get('/users', UserController.index);
-routes.get('/user', UserController.user);
+routes.get('/users/:id', UserController.user);
 routes.post('/users', UserController.store);
 routes.put('/users/:id', UserController.update);
 routes.delete('/users/:id', UserController.delete);
