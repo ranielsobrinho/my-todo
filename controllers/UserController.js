@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const bcrypt = require('bcrypt')
 
 module.exports = {
     async index(req, res){
@@ -7,17 +8,20 @@ module.exports = {
     },
 
     async user(req, res){
-        const {email} = req.body;
+        const {id} = req.params;
 
-        const user = await User.findOne({where:{email}});
+        const user = await User.findOne({where:{id}});
         res.send(user);
     },
 
     async store (req, res) {
         const { name, email } = req.body;
         delete req.body.id;
-
-        const user = await User.create({ name, email });
+        const saltRounds = 10;
+        
+        const salt = bcrypt.genSaltSync(saltRounds);
+        const password = bcrypt.hashSync(req.body.password, salt)
+        const user = await User.create({ name, email, password });
 
         return res.json(user);
     }, catch(error){
@@ -26,10 +30,10 @@ module.exports = {
     
     async update( req, res ){
         const { id } = req.params;
-        const { name, email } = req.body;
+        const { name, email, senha } = req.body;
         delete req.body.id;
 
-        const updatedUser = await User.update({name, email},{
+        const updatedUser = await User.update({name, email, senha},{
             where: {id}
         });
 
