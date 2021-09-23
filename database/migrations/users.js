@@ -1,7 +1,5 @@
 const Sequelize = require("sequelize");
 const database = require('../db');
-const bcrypt = require('bcrypt');
-const { password } = require("pg/lib/defaults");
 
 const Users = database.define("Users", {
     id: {
