@@ -43,10 +43,16 @@ module.exports = {
         const {id} = req.params;
         delete req.body.id;
 
+        const user = await User.findOne({where:{id}});
+
+        if (!user) {
+            return res.status(404).json({message: 'User not found'})
+        }
+
         const deletedUser = await User.destroy({
             where: {id}
         });
 
-        res.status(200).json({status:'Operação feita com sucesso'});
+        return res.status(200).json({status:'Operação feita com sucesso'});
     }
 }
