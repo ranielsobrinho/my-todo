@@ -12,10 +12,6 @@ module.exports = {
             if (!user) {
                 res.status(401).json({error: 'Falha na autenticação'});
             }
-            (async () => {
-                // Load hash from your password DB.
-                const result1 = await bcrypt.compare(myPlaintextPassword, hash);
-            });
             bcrypt.compare(password, user.password, (err, result) => {
                 if (err) {
                     return res.status(401).json({error: 'Falha na autenticação'});
