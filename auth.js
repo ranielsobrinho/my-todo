@@ -1,32 +1,13 @@
-const passport = require('passport');
-const { Strategy, ExtractJwt } = require('passport-jwt');
+const jwt = require('jwt-simple');
+const key = require('./libs/config')
 
-module.exports = app => {
-    const Users = require('./models/User');
-    const cfg = require('./libs/config')
-
-    const opts = {};
-    opts.secretOrKey = cfg.jwtSecret;
-    opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme("jwt");
-
-    const strategy = new Strategy(opts, (payload, done) => {
-        Users.findByPk(payload.id)
-        .then(user => {
-            if(user) {
-                return done(null, {
-                    id: user.id,
-                    email: user.email
-                });
-            }
-            return done(null, false)
-        })
-        .catch(error => done(error, null));
-    })
-
-    passport.use(strategy);
-
-    return {
-        initialize: () => passport.initialize(),
-        authenticate: () => passport.authenticate('jwt', cfg.jwtSecret)
+module.exports = (req, res, next) => {
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        const decode = jwt.decode(token, key.jwtSecret)
+        req.usuario = decode;
+        next();
+    } catch (error) {
+        return res.status(401).json({mensagem : 'Falha na autenticação'});
     }
 }
