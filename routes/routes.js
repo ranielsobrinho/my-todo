@@ -9,13 +9,13 @@ const routes = express.Router();
 routes.get('/users', UserController.index);
 routes.get('/users/:id', UserController.user);
 routes.post('/users', UserController.store);
-routes.patch('/users/:id', auth, UserController.update);
+routes.put('/users/:id', auth, UserController.update);
 routes.delete('/users/:id', auth,  UserController.delete);
 
 routes.post('/users/:userId/todos', auth, TodoController.store);
 routes.get('/users/:userId/todos', auth, TodoController.index);
-routes.patch('/users/:id/todos', auth, TodoController.update);
-routes.delete('/users/:id/todos', auth, TodoController.delete);
+routes.put('/todos/:id', auth, TodoController.update);
+routes.delete('/todos/:id', auth, TodoController.delete);
 
 routes.post('/token', AuthController.token);
 
