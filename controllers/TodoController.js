@@ -39,27 +39,33 @@ module.exports = {
     },
 
     async update( req, res ){
-        const {id} = req.params;
-        const {content, done} = req.body;
-        delete req.body.id;
+        const{ id } = req.params;
+        const { content, done } = req.body;
 
-        const updatedTodo = await Todo.update({content, done},{
-            where:{id}
-        });
-
-        return res.status(200).send('Ok');
-
+        try {
+            const updatedTodo = await Todo.update({content, done},{
+                where:{id}
+            });
+            return res.status(200).send('Ok');
+        } catch (error) {
+            return res.status(400).json({status: 'Falha na alteração'})
+        }
+        
     },
 
     async delete(req, res){
         const { id } = req.params
         delete req.body.id;
 
-        const deletedTodo = await Todo.destroy({
-            where: { id }
-        })
-
-        return res.status(200).json({status: "Operação feita com sucesso."});
+        try{
+            const deletedTodo = await Todo.destroy({
+                where: { id }
+            })
+            
+            return res.status(200).json({status: "Operação feita com sucesso."});
+        } catch(err) {
+            return res.status(400).json({status: 'Falha na deleção'})
+        }
   
     }
 }
