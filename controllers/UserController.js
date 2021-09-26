@@ -10,7 +10,9 @@ module.exports = {
     async user(req, res){
         const {id} = req.params;
 
-        const user = await User.findOne({where:{id}});
+        const user = await User.findOne({
+            where:{id},
+            include: 'todos'});
         res.send(user);
     },
 
