@@ -3,7 +3,8 @@ const { Model, DataTypes } = require('sequelize');
 class Todo extends Model{
     static init(sequelize){
         super.init({
-            content: DataTypes.STRING
+            content: DataTypes.STRING,
+            done: DataTypes.BOOLEAN
         }, {
             sequelize
         })
