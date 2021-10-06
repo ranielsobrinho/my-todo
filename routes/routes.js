@@ -14,6 +14,7 @@ routes.delete('/users/:id', auth,  UserController.delete);
 
 routes.post('/users/:userId/todos', auth, TodoController.store);
 routes.get('/users/:userId/todos', auth, TodoController.index);
+routes.get('/todos/:id', auth, TodoController.getTodo);
 routes.put('/todos/:id', auth, TodoController.update);
 routes.delete('/todos/:id', auth, TodoController.delete);
 
