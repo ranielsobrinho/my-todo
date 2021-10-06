@@ -24,7 +24,8 @@ module.exports = {
                 if (result) {
                     const payload = {id: user.id};
                     return res.json({
-                        token: jwt.encode( payload, config.jwtSecret )
+                        token: jwt.encode( payload, config.jwtSecret ),
+                        userId: user.id
                     })
                 }
             });
