@@ -20,6 +20,18 @@ module.exports = {
         res.send(user.todos);
     },
 
+    async getTodo(req, res){
+        const {id} = req.params;
+
+        const todo = await Todo.findByPk(id);
+
+        if(!todo){
+            res.status(404).json({error: 'Todo not found'});
+        }
+
+        return res.status(200).json(todo);
+    },
+
     async store(req, res){
         const { userId } = req.params;
         const { content } = req.body;
