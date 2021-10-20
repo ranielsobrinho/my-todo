@@ -14,7 +14,7 @@ module.exports = {
         });
 
         if(!user) {
-            res.status(400).json({error : 'User not found.'});
+            res.status(400).json({error : 'Usuário não encontrado.'});
         }
 
         res.send(user.todos);
@@ -26,7 +26,7 @@ module.exports = {
         const todo = await Todo.findByPk(id);
 
         if(!todo){
-            res.status(404).json({error: 'Todo not found'});
+            res.status(404).json({error: 'Todo não encontrado.'});
         }
 
         return res.status(200).json(todo);
@@ -40,7 +40,7 @@ module.exports = {
         const user = await User.findByPk(userId);
 
         if(!user){
-            res.status(400).json({error: 'User not found.'});
+            res.status(400).json({error: 'Usuário não encontrado.'});
         }
         const todo = await Todo.create({
             content,
@@ -60,7 +60,7 @@ module.exports = {
             });
             return res.status(200).send('Ok');
         } catch (error) {
-            return res.status(400).json({status: 'Falha na alteração'})
+            return res.status(400).json({status: 'Falha na alteração.'})
         }
         
     },
@@ -76,7 +76,7 @@ module.exports = {
             
             return res.status(200).json({status: "Operação feita com sucesso."});
         } catch(err) {
-            return res.status(400).json({status: 'Falha na deleção'})
+            return res.status(400).json({status: 'Falha na deleção.'})
         }
   
     }

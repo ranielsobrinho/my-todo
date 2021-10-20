@@ -10,15 +10,15 @@ module.exports = {
         const userToken = await User.findOne({where:{email}})
         .then(user => {
             if (!user) {
-                res.status(401).json({error: 'Falha na autenticação'});
+                res.status(401).json({error: 'Falha na autenticação.'});
             }
             bcrypt.compare(password, user.password, (err, result) => {
                 if (err) {
-                    return res.status(401).json({error: 'Falha na autenticação'});
+                    return res.status(401).json({error: 'Falha na autenticação.'});
                 }
 
                 if (!result) {
-                    return res.json({error: 'password invalid'});
+                    return res.json({error: 'Senha inválida.'});
                 }
 
                 if (result) {
