@@ -13,6 +13,16 @@
     "react",
     "postgres"
   ],
+  "lint-staged": {
+    "*.js": [
+      "standard --fix"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "author": "Raniel Sobrinho",
   "license": "MIT",
   "dependencies": {
@@ -28,7 +38,10 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.5",
     "nodemon": "^2.0.12",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "standard": "^16.0.4"
   }
 }
