@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
-const config = require('../libs/config');
+const config = require("../libs/config");
 
-const User = require('../models/User');
-const Todo = require('../models/Todo');
+const User = require("../models/User");
+const Todo = require("../models/Todo");
 
 const sequelize = new Sequelize(config);
 
